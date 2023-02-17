@@ -37,7 +37,7 @@ def matches_salary_range(job: Dict, salary: Union[int, str]) -> bool:
 
         if type(max_salary and min_salary and salary) != int:
             raise ValueError("Some of the values are not integers")
-        elif int(job["min_salary"]) > int(job["max_salary"]):
+        elif int(min_salary) > int(max_salary):
             raise ValueError(
                 "The minimum salary can't be greater than the maximum salary"
             )
@@ -52,12 +52,9 @@ def filter_by_salary_range(
     jobs_list = []
 
     for job in jobs:
-        if "min_salary" not in job or "max_salary" not in job:
-            min_salary = job["min_salary"]
-            max_salary = job["max_salary"]
-            if (min_salary, max_salary and salary != "") and (
-                isinstance(min_salary and max_salary and salary, int)
-            ):
-                if min_salary <= salary <= max_salary:
-                    jobs_list.append(job)
+        try:
+            if matches_salary_range(job, salary):
+                jobs_list.append(job)
+        except ValueError:
+            pass
     return jobs_list
