@@ -1,25 +1,17 @@
-from flask import Flask, Blueprint, render_template, request, send_file
-
-from src.insights.jobs import (
-    read,
-    get_unique_job_types,
-    filter_by_job_type,
-)
-from src.insights.industries import (
-    get_unique_industries,
-    filter_by_industry,
-)
-
-from src.insights.salaries import (
-    filter_by_salary_range,
-    get_min_salary,
-    get_max_salary,
-)
+from flask import Blueprint, Flask, render_template, request, send_file
 
 from src.flask_app.more_insights import (
-    slice_jobs,
-    get_int_from_args,
     build_jobs_urls,
+    get_int_from_args,
+    get_job,
+    slice_jobs,
+)
+from src.insights.industries import filter_by_industry, get_unique_industries
+from src.insights.jobs import filter_by_job_type, get_unique_job_types, read
+from src.insights.salaries import (
+    filter_by_salary_range,
+    get_max_salary,
+    get_min_salary,
 )
 
 bp = Blueprint("client", __name__, template_folder="templates")
@@ -41,6 +33,13 @@ def index():
 </h2>
         """
     return render_template("index.jinja2", md=md)
+
+
+@bp.route("/job/<index>")
+def job(index):
+    jobs = read(path="data/jobs.csv")
+    job = get_job(jobs, index)
+    return render_template("job.jinja2", job=job)
 
 
 @bp.route("/jobs")
