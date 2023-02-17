@@ -2,14 +2,6 @@ from typing import Dict, List, Union
 
 from src.insights.jobs import read
 
-# def verify_int(*values):
-#     valid_value = True
-#     for value in values:
-#         if type(value) != int:
-#             valid_value = False
-#             break
-#     return valid_value
-
 
 def get_max_salary(path: str) -> int:
     file = read(path)
@@ -53,8 +45,13 @@ def filter_by_salary_range(
 
     for job in jobs:
         try:
-            if matches_salary_range(job, salary):
+            int(salary)
+            max_salary = int(job.get("max_salary"))
+            min_salary = int(job.get("min_salary"))
+            if (min_salary, max_salary) is not None and min_salary <= int(
+                salary
+            ) <= max_salary:
                 jobs_list.append(job)
-        except ValueError:
+        except Exception:
             pass
     return jobs_list
