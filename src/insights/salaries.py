@@ -2,6 +2,14 @@ from typing import Dict, List, Union
 
 from src.insights.jobs import read
 
+# def verify_int(*values):
+#     valid_value = True
+#     for value in values:
+#         if type(value) != int:
+#             valid_value = False
+#             break
+#     return valid_value
+
 
 def get_max_salary(path: str) -> int:
     file = read(path)
@@ -22,46 +30,34 @@ def get_min_salary(path: str) -> int:
 
 
 def matches_salary_range(job: Dict, salary: Union[int, str]) -> bool:
-    """Checks if a given salary is in the salary range of a given job
+    try:
+        int(salary)
+        max_salary = int(job.get("max_salary"))
+        min_salary = int(job.get("min_salary"))
 
-    Parameters
-    ----------
-    job : dict
-        The job with `min_salary` and `max_salary` keys
-    salary : int
-        The salary to check if matches with salary range of the job
-
-    Returns
-    -------
-    bool
-        True if the salary is in the salary range of the job, False otherwise
-
-    Raises
-    ------
-    ValueError
-        If `job["min_salary"]` or `job["max_salary"]` doesn't exists
-        If `job["min_salary"]` or `job["max_salary"]` aren't valid integers
-        If `job["min_salary"]` is greather than `job["max_salary"]`
-        If `salary` isn't a valid integer
-    """
-    raise NotImplementedError
+        if type(max_salary and min_salary and salary) != int:
+            raise ValueError("Some of the values are not integers")
+        elif int(job["min_salary"]) > int(job["max_salary"]):
+            raise ValueError(
+                "The minimum salary can't be greater than the maximum salary"
+            )
+    except TypeError:
+        raise ValueError
+    return int(min_salary) <= int(salary) <= int(max_salary)
 
 
 def filter_by_salary_range(
     jobs: List[dict], salary: Union[str, int]
 ) -> List[Dict]:
-    """Filters a list of jobs by salary range
+    jobs_list = []
 
-    Parameters
-    ----------
-    jobs : list
-        The jobs to be filtered
-    salary : int
-        The salary to be used as filter
-
-    Returns
-    -------
-    list
-        Jobs whose salary range contains `salary`
-    """
-    raise NotImplementedError
+    for job in jobs:
+        if "min_salary" not in job or "max_salary" not in job:
+            min_salary = job["min_salary"]
+            max_salary = job["max_salary"]
+            if (min_salary, max_salary and salary != "") and (
+                isinstance(min_salary and max_salary and salary, int)
+            ):
+                if min_salary <= salary <= max_salary:
+                    jobs_list.append(job)
+    return jobs_list
