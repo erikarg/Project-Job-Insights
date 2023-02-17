@@ -10,12 +10,13 @@ Projeto desenvolvido durante o quarto módulo (ciência da computação) do curs
 
 ## Objetivo
 
-Implementar análises a partir de um conjunto de dados sobre empregos (extraídos do Glassdoor e obtidos através do Kaggle). Essas análises são incorporadas a um aplicativo web desenvolvido com Flask. A aplicação também conta com testes.
+Implementar análises a partir de um conjunto de dados sobre empregos (extraídos do Glassdoor e obtidos através do Kaggle). Essas análises são incorporadas a um aplicativo web desenvolvido com Flask. A aplicação também conta com testes realizados com Pytest.
 
 ## Stacks utilizadas
 
 * **Linguagem:** Python
 * **Framework:** Flask
+* **Testes:** Pytest
 
 ## Rodando localmente
 
@@ -38,12 +39,13 @@ Project developed during the fourth module (computer science) of the Trybe cours
 
 ## Objective
 
-Implement analytics from a job dataset (pulled from Glassdoor and retrieved through Kaggle). These analyzes are built into a web application built using Flask. The application also has tests.
+Implement analytics from a job dataset (pulled from Glassdoor and retrieved through Kaggle). These analyzes are built into a web application built using Flask. The application also has tests developed with Pytest.
 
 ## Stacks
 
 * **Language:** Python
 * **Framework:** Flask
+* **Tests:** Pytest
 
 ## Running the application locally
 
